@@ -1,4 +1,4 @@
-(defproject opentracing-clj "0.1.5-SNAPSHOT"
+(defproject opentracing-clj "0.1.6"
   :description "Opentracing API support for Clojure built on top of opentracing-java."
   :url "https://github.com/alvinfrancis/opentracing-clj"
   :license {:name         "Eclipse Public License"
@@ -6,9 +6,9 @@
             :distribution :repo}
   :source-paths ["src/clj"]
   :plugins [[lein-codox "0.10.4"]]
-  :dependencies [[io.opentracing/opentracing-api "0.32.0"]
-                 [io.opentracing/opentracing-noop "0.32.0"]
-                 [io.opentracing/opentracing-util "0.32.0"]
+  :dependencies [[io.opentracing/opentracing-api "0.31.0"]
+                 [io.opentracing/opentracing-noop "0.31.0"]
+                 [io.opentracing/opentracing-util "0.31.0"]
                  [ring/ring-core "1.7.1"]]
   :codox {:output-path "codox"
           :metadata    {:doc/format :markdown}

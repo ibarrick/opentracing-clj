@@ -216,7 +216,7 @@
            ~s  (get-span* m#)]
        (try
          (with-open [^Scope _# (.activate (.scopeManager *tracer*)
-                                          ~s)]
+                                          ~s false)]
            ~@body)
          (finally
            (when (:finish? m# true)
