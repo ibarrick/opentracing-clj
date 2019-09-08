@@ -1,4 +1,4 @@
-(defproject opentracing-clj "0.1.6"
+(defproject com.servisuite/opentracing-clj "0.1.6"
   :description "Opentracing API support for Clojure built on top of opentracing-java."
   :url "https://github.com/alvinfrancis/opentracing-clj"
   :license {:name         "Eclipse Public License"
@@ -9,6 +9,7 @@
   :dependencies [[io.opentracing/opentracing-api "0.31.0"]
                  [io.opentracing/opentracing-noop "0.31.0"]
                  [io.opentracing/opentracing-util "0.31.0"]
+                 [com.datadoghq/dd-trace-ot "0.32.0"]
                  [ring/ring-core "1.7.1"]]
   :codox {:output-path "codox"
           :metadata    {:doc/format :markdown}

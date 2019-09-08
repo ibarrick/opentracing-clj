@@ -7,7 +7,8 @@
    [opentracing-clj.span-builder :as sb]
    [ring.util.request])
   (:import (io.opentracing Span SpanContext Tracer Scope)
-           (io.opentracing.util GlobalTracer)))
+           (io.opentracing.util GlobalTracer))
+  (:import datadog.trace.api.DDTags))
 
 (def ^:dynamic ^Tracer *tracer*
   "An Tracer object representing the standard tracer for trace operations.
@@ -181,7 +182,7 @@
       (sb/with-start-timestamp builder start-ts#))
     (when-let [parent# (:child-of span-data)]
       (sb/child-of builder parent#))
-    (.start builder)))
+    (.startActive builder true)))
 
 (s/fdef build-new-span
   :args (s/cat :span-data :opentracing/span-data)
@@ -213,12 +214,13 @@
   (let [s (binding 0)
         m (binding 1)]
     `(let [m#  ~m
-           ~s  (get-span* m#)]
+           cs# (get-span* m#)
+           ~s (.span cs#)]
        (try
-         (with-open [^Scope _# (.activate (.scopeManager *tracer*)
-                                          ~s false)]
-           ~@body)
+         (.setTag ~s DDTags/SERVICE_NAME "clojure-app")
+         ~@body
          (finally
+           (.close cs#)
            (when (:finish? m# true)
              (.finish ~s)))))))
 
